@@ -14,7 +14,8 @@ function AppHeader({token,setToken}){
                 <div className="logo">
                     <a href="#">YOLO</a>
                 </div>
-                        {token? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>}
+                <Button onClick={()=>logOutHandler()}>LogOut</Button>
+                        {/* {token? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>} */}
                         
                    
                 
