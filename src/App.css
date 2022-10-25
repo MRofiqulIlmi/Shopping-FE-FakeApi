@@ -9,6 +9,7 @@
 /* #Header */
 
 .header{
+  height: 10vh;
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -20,4 +21,29 @@
 
 img{
   object-fit: contain;
+}
+
+/* footer */
+
+.footer{
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* login */
+
+.loginHolder{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.blockCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,15 +1,21 @@
 import React from "react";
-import {Menu, Button } from 'antd';
+import { Button } from 'antd';
 
-function AppHeader(){
+function AppHeader({token,setToken}){
+    
+    const logOutHandler = () => {
+        setToken("");
+        localStorage.clear();
+    }
+    
     return(
         <div className="container-fluid">
             <div className="header">
                 <div className="logo">
                     <a href="#">YOLO</a>
                 </div>
-                
-                        <Button>LogOut</Button>
+                        {token? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>}
+                        
                    
                 
             </div>
