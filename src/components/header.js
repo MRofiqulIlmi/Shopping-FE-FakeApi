@@ -1,5 +1,8 @@
 import React from "react";
-import { Button } from 'antd';
+import { Button, Avatar, Popover } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
+
 
 function AppHeader({loginStatus,setToken}){
     
@@ -8,6 +11,20 @@ function AppHeader({loginStatus,setToken}){
         localStorage.clear();
     }
     
+    const statusList = (
+        <div>
+            
+            <p><a href="#">Profile</a></p>
+            <p><a href="#">Change Password</a></p>
+            <Button onClick={()=>logOutHandler()}>LogOut</Button>
+            
+        </div>
+    );
+    
+    const userTitle = <p>Name</p>
+
+
+
     console.log("loginStatus : " + loginStatus);
     
     return(
@@ -16,8 +33,16 @@ function AppHeader({loginStatus,setToken}){
                 <div className="logo">
                     <a href="#">YOLO</a>
                 </div>
-                
-                    {loginStatus? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>}
+
+
+                    
+                    
+                    {loginStatus?
+                    <Popover placement="bottom" title={userTitle} content={statusList} trigger="click">
+                        <Avatar size="large" icon={<UserOutlined />} />
+                    </Popover>
+                    :<div></div>}
+
                         
                    
                 

@@ -6,11 +6,45 @@ function AppLogin({token,setToken}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [userDB, setUserDB] = useState({});
+    // usestate langsung ke username aja yang akan dimunculin, nggak usah save object nya.. dilepas aja satu2
 
+    const [userUsername, setUserUsername] = useState("");
+    const [userFirstName, setUserFirstName] = useState("");
+    
+    
+    const getUserDetail = (username) => {
+        axios({
+            method:"GET",
+            url: "https://fakestoreapi.com/users",
+
+        }).then(res => {
+            console.log(typeof(res));
+            console.log(username);
+            console.log(
+                res.data
+            );
+            console.log(
+                res.data.filter((val) => {return val.username === username})
+            )
+            const val2 = res.data.filter((val) => {return val.username === username})[0];
+            console.log("val2");
+            console.log(val2);
+            console.log("val2 username");
+            console.log(val2.username);
+            setUserDB(
+                ...userDB,
+                ...val2
+            );
+            console.log("userDB");
+            console.log(userDB);
+        })
+    }
+    
+    
+    
     const loginHandler = () => {
-        setError("");
-        setPassword("");
-        setUsername("");
+        
 
         axios({
             method: "POST",
@@ -23,13 +57,22 @@ function AppLogin({token,setToken}) {
             console.log(res.data.token);
             setToken(res.data.token);
             localStorage.setItem('userToken', res.data.token);
+            getUserDetail(username);
+            console.log("userDB");
+            console.log(userDB);
+            
         }).catch(err => {
             console.log(err.response.data);
             setError(err.response.data);
         })
+
+        setError("");
+        setPassword("");
+        setUsername("");
+
     }
 
-
+    
     // const onFinish = (values) => {
     //     console.log('Success:', values);
     //   };
