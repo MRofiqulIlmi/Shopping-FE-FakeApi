@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from 'antd';
 
-function AppHeader({token,setToken}){
+function AppHeader({loginStatus,setToken}){
     
     const logOutHandler = () => {
         setToken("");
         localStorage.clear();
     }
+    
+    console.log("loginStatus : " + loginStatus);
     
     return(
         <div className="container-fluid">
@@ -14,8 +16,8 @@ function AppHeader({token,setToken}){
                 <div className="logo">
                     <a href="#">YOLO</a>
                 </div>
-                <Button onClick={()=>logOutHandler()}>LogOut</Button>
-                        {/* {token? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>} */}
+                
+                    {loginStatus? <Button onClick={()=>logOutHandler()}>LogOut</Button>:<div></div>}
                         
                    
                 
