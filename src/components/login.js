@@ -2,18 +2,15 @@ import React, {useState} from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 
-function AppLogin({token,setToken}) {
+function AppLogin({token,setToken,parentSetUsername,parentSetPassword, parentSetUserFirstName, parentSetUserLastName, parentSetUserEmail}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [userDB, setUserDB] = useState({});
-    // usestate langsung ke username aja yang akan dimunculin, nggak usah save object nya.. dilepas aja satu2
 
-    const [userUsername, setUserUsername] = useState("");
-    const [userFirstName, setUserFirstName] = useState("");
     
     
     const getUserDetail = (username) => {
+
         axios({
             method:"GET",
             url: "https://fakestoreapi.com/users",
@@ -24,20 +21,21 @@ function AppLogin({token,setToken}) {
             console.log(
                 res.data
             );
-            console.log(
-                res.data.filter((val) => {return val.username === username})
-            )
-            const val2 = res.data.filter((val) => {return val.username === username})[0];
-            console.log("val2");
-            console.log(val2);
-            console.log("val2 username");
-            console.log(val2.username);
-            setUserDB(
-                ...userDB,
-                ...val2
-            );
-            console.log("userDB");
-            console.log(userDB);
+            const userData = res.data.filter((val) => {return val.username === username})[0];
+            
+            parentSetUsername(username);
+            parentSetPassword(password);
+            parentSetUserFirstName(userData.name.firstname);
+            parentSetUserLastName(userData.name.lastname);
+            parentSetUserEmail(userData.email);
+
+            
+
+            // parentUserProfileCallback(username, password, userFirstName, userLastName, userEmail);
+            
+            
+
+            
         })
     }
     
@@ -45,7 +43,10 @@ function AppLogin({token,setToken}) {
     
     const loginHandler = () => {
         
-
+        setError("");
+        setPassword("");
+        setUsername("");
+        
         axios({
             method: "POST",
             url: "https://fakestoreapi.com/auth/login",
@@ -55,20 +56,19 @@ function AppLogin({token,setToken}) {
             }
         }).then(res => {
             console.log(res.data.token);
+            
+            getUserDetail(username);
+
+
             setToken(res.data.token);
             localStorage.setItem('userToken', res.data.token);
-            getUserDetail(username);
-            console.log("userDB");
-            console.log(userDB);
             
         }).catch(err => {
             console.log(err.response.data);
             setError(err.response.data);
         })
 
-        setError("");
-        setPassword("");
-        setUsername("");
+        
 
     }
 

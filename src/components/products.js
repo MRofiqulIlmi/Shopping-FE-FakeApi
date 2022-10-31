@@ -17,7 +17,7 @@ function AppProducts() {
             url:'https://fakestoreapi.com/products'
         }).then(
             res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setData(res.data)
             }
         ).catch((e) => console.log(e))
@@ -33,8 +33,8 @@ function AppProducts() {
                         <h1>Loading . . .</h1>
                     </div>
                 )}
-                {console.log("data")}
-                {console.log(data)}
+                {/* {console.log("data")} */}
+                {/* {console.log(data)} */}
                 
                 <Row gutter={[16,16]} style={{
                                 justifyContent: 'center',

@@ -4,10 +4,12 @@ import { UserOutlined } from '@ant-design/icons';
 
 
 
-function AppHeader({loginStatus,setToken}){
+function AppHeader({loginStatus,setToken,userFirstName, userLastName, setUserFirstName, setUserLastName}){
     
     const logOutHandler = () => {
         setToken("");
+        setUserFirstName("");
+        setUserLastName("");
         localStorage.clear();
     }
     
@@ -21,7 +23,7 @@ function AppHeader({loginStatus,setToken}){
         </div>
     );
     
-    const userTitle = <p>Name</p>
+    const userTitle = <p>{userFirstName + " " + userLastName}</p>
 
 
 

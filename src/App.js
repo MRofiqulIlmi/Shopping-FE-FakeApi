@@ -15,6 +15,12 @@ function App() {
 
   const[token, setToken] = useState(localStorage.getItem('userToken')?? null);
   const[loginStatus, setLoginStatus] = useState(false);
+  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     if(token){
@@ -26,13 +32,27 @@ function App() {
 
 
 
+
   return (
     <Layout className="mainLayout">
     <Header>
-      <AppHeader setToken={setToken} loginStatus={loginStatus}/>
+      <AppHeader setToken={setToken} loginStatus={loginStatus} 
+      userFirstName={userFirstName} 
+      userLastName={userLastName}
+      setUserFirstName={setUserFirstName}
+      setUserLastName={setUserLastName}
+      />
     </Header>
     <Content>
-      {token? <AppProducts />: <AppLogin token={token} setToken={setToken} />}
+      {token? <AppProducts />: <AppLogin token={token} setToken={setToken} 
+      parentSetUsername={setUsername}
+      parentSetPassword={setPassword}
+      parentSetUserFirstName={setUserFirstName}
+      parentSetUserLastName={setUserLastName}
+      parentSetUserEmail={setUserEmail}
+      
+      
+      />}
       
     </Content>
     <Footer>
