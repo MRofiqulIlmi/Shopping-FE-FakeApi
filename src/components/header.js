@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Avatar, Popover } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import {Link} from 'react-router-dom';
 
 
 
@@ -16,8 +17,9 @@ function AppHeader({loginStatus,setToken,userFirstName, userLastName, setUserFir
     const statusList = (
         <div>
             
-            <p><a href="#">Profile</a></p>
-            <p><a href="#">Change Password</a></p>
+            <Link to="/"><p>Product</p></Link>
+            <Link to="/profile"><p>Profile</p></Link>
+            <Link to="/changepassword"><p>Change Password</p></Link>
             <Button onClick={()=>logOutHandler()}>LogOut</Button>
             
         </div>

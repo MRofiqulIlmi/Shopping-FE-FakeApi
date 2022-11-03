@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
+import {redirect, Navigate, useNavigate} from 'react-router-dom';
 
-function AppLogin({token,setToken,parentSetUsername,parentSetPassword, parentSetUserFirstName, parentSetUserLastName, parentSetUserEmail}) {
+function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFirstName, parentSetUserLastName, parentSetUserEmail}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
-    
+    const [newToken, setNewToken] = useState(null);
+    let navigate = useNavigate();
+   
     
     const getUserDetail = (username) => {
 
@@ -61,16 +63,32 @@ function AppLogin({token,setToken,parentSetUsername,parentSetPassword, parentSet
 
 
             setToken(res.data.token);
+            setNewToken(res.data.token);
             localStorage.setItem('userToken', res.data.token);
+
+            if(res.data.token){
+                return(navigate("/product"));
+            }
+
+           
             
+
+
         }).catch(err => {
             console.log(err.response.data);
             setError(err.response.data);
         })
 
+              
+        
+            
         
 
+        
+        
     }
+
+    
 
     
     // const onFinish = (values) => {
