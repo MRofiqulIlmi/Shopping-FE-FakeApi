@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import {redirect, Navigate, useNavigate} from 'react-router-dom';
 
-function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFirstName, parentSetUserLastName, parentSetUserEmail}) {
+function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFirstName, parentSetUserLastName, parentSetUserEmail, parentSetUserObj}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -11,35 +11,7 @@ function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFi
     let navigate = useNavigate();
    
     
-    const getUserDetail = (username) => {
-
-        axios({
-            method:"GET",
-            url: "https://fakestoreapi.com/users",
-
-        }).then(res => {
-            console.log(typeof(res));
-            console.log(username);
-            console.log(
-                res.data
-            );
-            const userData = res.data.filter((val) => {return val.username === username})[0];
-            
-            parentSetUsername(username);
-            parentSetPassword(password);
-            parentSetUserFirstName(userData.name.firstname);
-            parentSetUserLastName(userData.name.lastname);
-            parentSetUserEmail(userData.email);
-
-            
-
-            // parentUserProfileCallback(username, password, userFirstName, userLastName, userEmail);
-            
-            
-
-            
-        })
-    }
+  
     
     
     
@@ -59,12 +31,15 @@ function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFi
         }).then(res => {
             console.log(res.data.token);
             
-            getUserDetail(username);
+            
+            
 
 
             setToken(res.data.token);
             setNewToken(res.data.token);
             localStorage.setItem('userToken', res.data.token);
+            
+            localStorage.setItem('username', username);
 
             if(res.data.token){
                 return(navigate("/product"));
@@ -112,21 +87,22 @@ function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFi
         autoComplete="off"
         >
         <Form.Item
-            label="Username"
+            // label="Username"
             name="username"
             
             rules={[
             {
                 required: true,
                 message: 'Please input your username!',
+                
             },
             ]}
         >
-            <Input value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <Input placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)}/>
         </Form.Item>
 
         <Form.Item
-            label="Password"
+            // label="Password"
             name="password"
             
             rules={[
@@ -136,7 +112,7 @@ function AppLogin({setToken,parentSetUsername,parentSetPassword, parentSetUserFi
             },
             ]}
         >
-            <Input.Password value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input.Password placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         </Form.Item>
         {error && <small>{error}</small>}
         <div className='blockCenter'>

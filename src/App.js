@@ -36,21 +36,7 @@ function App() {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-
-  // token===null? console.log("out"): console.log("in");
- 
-
-  useEffect(() => {
-    if(token){
-      setLoginStatus(true);
-      localStorage.setItem('userLogin', true);
-    }else{
-      setLoginStatus(false);
-      localStorage.setItem('userLogin', false);
-    }
-  })
-
-  
+  const [userObj, setUserObj] = useState("");
 
 
   console.log("loginStatus");
@@ -59,14 +45,13 @@ function App() {
   console.log("token");
   console.log(token);
 
+  console.log("User obj");
+  console.log(userObj);
+
   return (
     <Layout className="mainLayout">
     <Header>
-      <AppHeader setToken={setToken} loginStatus={loginStatus} 
-      userFirstName={userFirstName} 
-      userLastName={userLastName}
-      setUserFirstName={setUserFirstName}
-      setUserLastName={setUserLastName}
+      <AppHeader setToken={setToken} token={token} 
       />
     </Header>
     <Content>
@@ -74,26 +59,12 @@ function App() {
       
 
       <Routes>
-
-        {/* <Route index element={
-          <ProtectedRoute loginStatusParent={loginStatus} loginPage={<AppLogin token={token} setToken={setToken} 
-          parentSetUsername={setUsername}
-          parentSetPassword={setPassword}
-          parentSetUserFirstName={setUserFirstName}
-          parentSetUserLastName={setUserLastName}
-          parentSetUserEmail={setUserEmail}
-          />}>
-            <AppProducts />
-          </ProtectedRoute>
-        } /> */}
-
         
-       {/* =========================== */}
+        
         
         <Route element={<ProtectedRoute loginStatusParent={loginStatus} />}>
-        <Route path="/" element={<AppProfile />} />
+          <Route path="/profile" element={<AppProfile userObj={userObj}/>} />
           <Route path="/product" element={<AppProducts />} />
-          
         </Route> 
         
         <Route path="/login" element={<AppLogin setToken={setToken} 
@@ -102,39 +73,13 @@ function App() {
           parentSetUserFirstName={setUserFirstName}
           parentSetUserLastName={setUserLastName}
           parentSetUserEmail={setUserEmail}
+          parentSetUserObj={setUserObj}
           />} /> 
 
-        {/* ===================== */}
-     
-      {/* <Route path="/product" element={
-      <ProtectedRoute loginStatusParent={loginStatus} loginPage={<AppLogin token={token} setToken={setToken} 
-      parentSetUsername={setUsername}
-      parentSetPassword={setPassword}
-      parentSetUserFirstName={setUserFirstName}
-      parentSetUserLastName={setUserLastName}
-      parentSetUserEmail={setUserEmail}
-      />}>
-        <AppProducts />
-      </ProtectedRoute>
-      } />
-
-      <Route path="/profile" element={
-      <ProtectedRoute loginStatus={loginStatus}>
-        <AppProfile />
-      </ProtectedRoute>
-      } /> */}
         
 
       </Routes>
 
-      {/* {token? <AppProducts />: 
-      <AppLogin token={token} setToken={setToken} 
-      parentSetUsername={setUsername}
-      parentSetPassword={setPassword}
-      parentSetUserFirstName={setUserFirstName}
-      parentSetUserLastName={setUserLastName}
-      parentSetUserEmail={setUserEmail}
-      />} */}
       
     </Content>
     <Footer>
