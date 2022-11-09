@@ -28,9 +28,6 @@ function AppHeader({
       <Link to="/profile">
         <p>Profile</p>
       </Link>
-      <Link to="/changepassword">
-        <p>Change Password</p>
-      </Link>
       <Button onClick={() => logOutHandler()}>LogOut</Button>
     </div>
   );

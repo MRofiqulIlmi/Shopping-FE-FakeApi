@@ -52,32 +52,32 @@ function AppProfile({ userObj }) {
         <div className="tableHolder">
           <Title level={3}>Profile Detail</Title>
           <Row className="rowHolder">
-            <Col span={12}>Username</Col>
-            <Col span={12}>{userDetail.username}</Col>
+            <Col span={8}>Username</Col>
+            <Col span={16}>{userDetail.username}</Col>
           </Row>
           <Row className="rowHolder">
-            <Col span={12}>Password</Col>
-            <Col span={12}>{userDetail.password}</Col>
+            <Col span={8}>Password</Col>
+            <Col span={16}>{userDetail.password}</Col>
           </Row>
           <Row className="rowHolder">
-            <Col span={12}>firstname</Col>
-            <Col span={12}>{userDetail.firstname}</Col>
+            <Col span={8}>firstname</Col>
+            <Col span={16}>{userDetail.firstname}</Col>
           </Row>
           <Row className="rowHolder">
-            <Col span={12}>Lastname</Col>
-            <Col span={12}>{userDetail.lastname}</Col>
+            <Col span={8}>Lastname</Col>
+            <Col span={16}>{userDetail.lastname}</Col>
           </Row>
           <Row className="rowHolder">
-            <Col span={12}>Email</Col>
-            <Col span={12}>{userDetail.email}</Col>
+            <Col span={8}>Email</Col>
+            <Col span={16}>{userDetail.email}</Col>
           </Row>
           <Row className="rowHolder">
-            <Col span={12}>Phone</Col>
-            <Col span={12}>{userDetail.phone}</Col>
+            <Col span={8}>Phone</Col>
+            <Col span={16}>{userDetail.phone}</Col>
           </Row>
           <Row className="rowHolder lastRow">
-            <Col span={12}>Address</Col>
-            <Col span={12}>{userDetail.addressStreet + " " + userDetail.addressNumber + ", " + userDetail.addressCity + ", " + userDetail.addressZipcode}</Col>
+            <Col span={8}>Address</Col>
+            <Col span={16}>{userDetail.addressStreet + " " + userDetail.addressNumber + ", " + userDetail.addressCity + ", " + userDetail.addressZipcode}</Col>
           </Row>
 
         </div>

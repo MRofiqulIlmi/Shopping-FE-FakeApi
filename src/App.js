@@ -8,6 +8,7 @@ import AppFooter from './components/footer';
 import AppLogin from './components/login';
 import AppProfile from './components/profile';
 import ProtectedRoute from './components/protectedroute';
+import AppProductDetail from './components/productDetail';
 
 import {
   BrowserRouter,
@@ -65,6 +66,7 @@ function App() {
         <Route element={<ProtectedRoute loginStatusParent={loginStatus} />}>
           <Route path="/profile" element={<AppProfile userObj={userObj}/>} />
           <Route path="/product" element={<AppProducts />} />
+          <Route path="/product/:productId" element={<AppProductDetail/>} />
         </Route> 
         
         <Route path="/login" element={<AppLogin setToken={setToken} 
